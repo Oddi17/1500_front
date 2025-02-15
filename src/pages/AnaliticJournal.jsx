@@ -20,7 +20,7 @@ export default function WaterBalance() {
 
     const getData = (start_time,end_time) => {
         setIsLoading(true);
-        const url = `http://127.0.0.1:8000/analitic/journal?start_time=${start_time}&end_time=${end_time}`
+        const url = `http://10.50.50.2/api/analitic/journal?start_time=${start_time}&end_time=${end_time}`
         axios.get(url,{withCredentials: true}).then((response)=>{ 
             const add_key_data = response.data.map((item,index)=>({
                 ...item,

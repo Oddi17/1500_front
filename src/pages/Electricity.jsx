@@ -19,7 +19,7 @@ function Electricity(){
 
     const getData = (start_time,end_time) => {
         setIsLoading(true);
-        const url = `http://127.0.0.1:8000/report/electricity?start_time=${start_time}&end_time=${end_time}`
+        const url = `http://10.50.50.2/api/report/electricity?start_time=${start_time}&end_time=${end_time}`
         axios.get(url,{withCredentials: true}).then((response)=>{ 
             setData(response.data)
         })

@@ -16,7 +16,7 @@ function AnaliticControl(){
 
     const handleSend= (data,url) => {
         setIsLoading(true);
-        axios.post(`http://127.0.0.1:8000/analitic/${url}`,data,{withCredentials: true})
+        axios.post(`http://10.50.50.2/api/analitic/${url}`,data,{withCredentials: true})
         .then((response)=>{ 
             setReset(true)
             message.success("Данные успешно отправлены")
