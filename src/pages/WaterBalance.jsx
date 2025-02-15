@@ -21,7 +21,7 @@ export default function WaterBalance() {
     
     const getData = (start_time,end_time,sample) => {
         setIsLoading(true);
-            const url = `http://10.50.50.2:8000/report/waterbalance?start_time=${start_time}&end_time=${end_time}&sample=${sample}`
+            const url = `http://127.0.0.1:8000/report/waterbalance?start_time=${start_time}&end_time=${end_time}&sample=${sample}`
             axios.get(url,{withCredentials: true}).then((response)=>{
             let my_index = 0
             const add_key_data = response.data.data_source.map((item,index)=>(my_index = index,{

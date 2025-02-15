@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
 
     const checkAuth = () => {
         axios
-            .get("http://10.50.50.2:8000/auth/", { withCredentials: true })
+            .get("http://127.0.0.1:8000/auth/", { withCredentials: true })
             .then((response) => {
                 if (response.status === 200) {
                     setIsAuth(true);

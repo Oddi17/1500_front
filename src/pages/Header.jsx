@@ -28,7 +28,7 @@ function Header(){
     };
     
     const handleLogout = () => {
-        axios.post("http://10.50.50.2:8000/auth/logout/",{}, {
+        axios.post("http://127.0.0.1:8000/auth/logout/",{}, {
             withCredentials: true,
         })
         .then((response)=>{

@@ -21,7 +21,7 @@ function Chemistry(){
 
     const getData = (start_time,end_time,sample) => {
         setIsLoading(true);
-        const url = `http://10.50.50.2:8000/report/chemistry?start_time=${start_time}&end_time=${end_time}&sample=${sample}`
+        const url = `http://127.0.0.1:8000/report/chemistry?start_time=${start_time}&end_time=${end_time}&sample=${sample}`
         axios.get(url,{withCredentials: true}).then((response)=>{ 
             setData({
                 'VOS1_V_KOAG_SUM': response.data['VOS1_V_KOAG_SUM'],
