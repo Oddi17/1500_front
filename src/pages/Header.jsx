@@ -28,7 +28,7 @@ function Header(){
     };
     
     const handleLogout = () => {
-        axios.post("http://10.50.50.2/api/auth/logout/",{}, {
+        axios.post("http://10.50.50.2/api/auth/logout",{}, {
             withCredentials: true,
         })
         .then((response)=>{

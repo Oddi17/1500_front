@@ -18,7 +18,7 @@ export default function Login(){
         setIsLoading(true)
         formlogin.validateFields().then((values) => {
           axios
-            .post("http://10.50.50.2/api/auth/login/", values, {
+            .post("http://10.50.50.2/api/auth/login", values, {
               withCredentials: true,
             })
             .then((response) => {
