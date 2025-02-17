@@ -1,5 +1,7 @@
 import React from 'react';
 import {Table,Button} from 'antd';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 const columns = [
     {
@@ -30,28 +32,28 @@ const columns = [
       onFilter: (value, record) => record.location.indexOf(value) === 0,
     },
     {
-      title: 'Температура',
+      title: 'Температура,град.С',
       dataIndex: "temperature",
       key: "temperature",
       width: '120px',
       align: "center",
     },
     {
-      title: 'pH',
+      title: 'Водородный показатель,ед.pH',
       dataIndex: "ph",
       key: "ph",
       width: '100px',
       align: "center",
     },
     {
-      title: 'Цветность',
+      title: 'Цветность,град.ХКШ',
       dataIndex: "color",
       key: "color",
       width: '110px',
       align: "center",
     },
     {
-      title: 'Ост. Хлор',
+      title: 'Ост.Хлор,мг/дм³',
       dataIndex: "chlorine",
       key: "chlorine",
       width: '110px',
@@ -59,14 +61,14 @@ const columns = [
       render: (text) => text ? text : "-"
     },
     {
-      title: 'Ост. Алюминий',
+      title: 'Ост.Алюминий,мг/дм³',
       dataIndex: "aluminum",
       key: "aluminum",
       width: '110px',
       align: "center",
     },
     {
-      title: 'Мутность',
+      title: 'Мутность,мг/дм³',
       dataIndex: "turbidity",
       key: "turbidity",
       width: '110px',
@@ -80,7 +82,7 @@ const columns = [
       align: "center",
     },
     {
-      title: 'Пользователь',
+      title: 'Лаборант',
       dataIndex: "username",
       key: "username",
       width: '160px',
@@ -90,6 +92,45 @@ const columns = [
 
 
 function AnaliticJournalTable({isLoading,data}){
+    const changeData = (data) => {
+      const collections_name = {
+        "recdt":"Дата/Время записи",
+        "location":"Локация",
+        "temperature":"Температура,град.С",
+        "ph":"Водородный показатель,ед.pH",
+        "color":"Цветность,град.ХКШ",
+        "chlorine":"Ост.Хлор,мг/дм³",
+        "aluminum":"Ост.Алюминий,мг/дм³",
+        "turbidity" : "Мутность,мг/дм³",
+        "chlorides" : "Хлориды",
+        "username" : "Лаборант",
+      }
+      let change_data = data.map((obj)=>{
+        delete obj.key
+        let item_object = {};
+        for (let item of Object.entries(obj)){
+          item_object[collections_name[item[0]]]=item[1];
+        }
+        return item_object;
+      });
+      return change_data
+    }
+    const exportToExcel = (exportData) => {
+          if (!exportData  || !exportTotals) {
+              console.error("Ошибка: данные отсутствуют")
+              return
+          }
+          const combinedData = [...changeData(exportData),...changeData(exportTotals)];
+          const ws = XLSX.utils.json_to_sheet(combinedData);
+          const wb = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(wb, ws, 'Журнал аналитического контроля');
+          const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+          const data = new Blob([excelBuffer], { type: 'application/octet-stream' });
+          saveAs(data, 'Журнал аналитического контроля.xlsx');
+    };
+
+
+
     const defaultTitle = () => 'Журнал аналитического контроля';
     return (
         <Table
@@ -103,6 +144,7 @@ function AnaliticJournalTable({isLoading,data}){
             footer={() => (
               <div style={{ display: 'flex', justifyContent: 'right' }}>
                 <Button type="primary">Экспорт в Excel</Button>
+                <Button onClick={()=>exportToExcel(data,totals)} type="primary">Экспорт в Excel</Button>
               </div>
               )}
         />

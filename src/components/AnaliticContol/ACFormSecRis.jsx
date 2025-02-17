@@ -80,7 +80,7 @@ function ACFormSecRis({handleSend,name,reset,setReset}) {
                 </Form.Item>
                 <Form.Item 
                     name="chlorine" 
-                    label="Ост. Хлор" 
+                    label="Ост.Хлор" 
                     normalize={(value) => value?.trim()}
                     rules={[
                         { required: true,message: 'Пожалуйста, введите ост. Хлор'},
@@ -90,7 +90,7 @@ function ACFormSecRis({handleSend,name,reset,setReset}) {
                 </Form.Item>
                 <Form.Item 
                     name="aluminum" 
-                    label="Ост. Алюминий" 
+                    label="Ост.Алюминий" 
                     normalize={(value) => value?.trim()}
                     rules={[
                         { required: true,message: 'Пожалуйста, введите ост. Алюминий'},
