@@ -142,7 +142,7 @@ function AnaliticJournalTable({isLoading,data}){
             scroll={{ y: 400 }} // Высота для вертикального скролла
             footer={() => (
               <div style={{ display: 'flex', justifyContent: 'right' }}>
-                <Button onClick={()=>exportToExcel(data,totals)} type="primary">Экспорт в Excel</Button>
+                <Button onClick={()=>exportToExcel(data)} type="primary">Экспорт в Excel</Button>
               </div>
               )}
         />
