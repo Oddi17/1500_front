@@ -32,6 +32,8 @@ export default function Login(){
                 setIsAuth(false)
                 if (error.status == 401){
                     message.error("Неправильный логин или пароль")
+                }else if (error.status == 404){
+                    message.error("Неправильный логин или пароль")
                 }else{
                     message.error(error.message)
                 }
