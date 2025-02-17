@@ -120,8 +120,7 @@ function AnaliticJournalTable({isLoading,data}){
               console.error("Ошибка: данные отсутствуют")
               return
           }
-          const combinedData = [...changeData(exportData),...changeData(exportTotals)];
-          const ws = XLSX.utils.json_to_sheet(combinedData);
+          const ws = XLSX.utils.json_to_sheet(changeData(exportData));
           const wb = XLSX.utils.book_new();
           XLSX.utils.book_append_sheet(wb, ws, 'Журнал аналитического контроля');
           const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
