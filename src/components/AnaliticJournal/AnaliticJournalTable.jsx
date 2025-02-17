@@ -42,14 +42,14 @@ const columns = [
       title: 'Водородный показатель,ед.pH',
       dataIndex: "ph",
       key: "ph",
-      width: '110px',
+      width: '120px',
       align: "center",
     },
     {
       title: 'Цветность,град.ХКШ',
       dataIndex: "color",
       key: "color",
-      width: '115px',
+      width: '120px',
       align: "center",
     },
     {
@@ -64,7 +64,7 @@ const columns = [
       title: 'Ост.Алюминий,мг/дм³',
       dataIndex: "aluminum",
       key: "aluminum",
-      width: '115px',
+      width: '120px',
       align: "center",
     },
     {
