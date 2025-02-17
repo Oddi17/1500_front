@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [isAuth, setIsAuth] = useState(false);
     const [role,setRole] = useState("")
+    const [name,setName] = useState("")
     const [isLoading, setIsLoading] = useState(true);
 
     const checkAuth = () => {
@@ -15,11 +16,13 @@ export const AuthProvider = ({ children }) => {
                 if (response.status === 200) {
                     setIsAuth(true);
                     setRole(response.data.role)
+                    setName(response.data.username)
                 }
             })
             .catch(() => {
                 setIsAuth(false);
                 setRole("")
+                setName("")
             })
             .finally(() => {
                 setIsLoading(false);
@@ -31,7 +34,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isAuth, setIsAuth, isLoading, setIsLoading, role, setRole }}>
+        <AuthContext.Provider value={{ isAuth, setIsAuth, isLoading, setIsLoading, role, setRole, name, setName}}>
             {children}
         </AuthContext.Provider>
     );

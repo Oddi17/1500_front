@@ -45,14 +45,6 @@ function App() {
               </ProtectedRoute> 
             }
           />
-          
-          {/* <Route path="/" element={<ProtectedRoute />} >
-            <Route path="waterbalance" element={<WaterBalance />} />
-            <Route path="chemistry" element={<Chemistry />} />
-            <Route path="electricity" element={<Electricity />} />
-            <Route path="reliability" element={<Reliability />} />
-            <Route path="analitic-control" element={<AnaliticControl />} />
-          </Route> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

@@ -33,4 +33,11 @@
     margin: 0px;
 }
 
+.current-time{
+    margin-top: 5px;
+    text-align: center;
+    display: block;
+    font-weight: 600 ;
+}
+
 

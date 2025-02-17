@@ -56,17 +56,17 @@ function ACFormSecRis({handleSend,name,reset,setReset}) {
                         { required: true,message: 'Пожалуйста, введите температуру' },
                         { pattern:/^-?\d+(\.\d+)?$/,message:"Введите корректное число" }
                         ]} >
-                    <Input />
+                    <Input addonAfter='град.С'/>
                 </Form.Item>
                 <Form.Item 
                     name="ph" 
-                    label="ph" 
+                    label="Водородный показатель,ph" 
                     normalize={(value) => value?.trim()}
                     rules={[
                         { required: true,message: 'Пожалуйста, введите pH'},
                         { pattern:/^-?\d+(\.\d+)?$/,message:"Введите корректное число" }
                     ]} >
-                    <Input />
+                    <Input addonAfter='ед.pH'/>
                 </Form.Item>
                 <Form.Item 
                     name="color" 
@@ -76,7 +76,7 @@ function ACFormSecRis({handleSend,name,reset,setReset}) {
                         { required: true,message: 'Пожалуйста, введите цветность'},
                         { pattern:/^-?\d+(\.\d+)?$/,message:"Введите корректное число" }
                     ]} >
-                    <Input />
+                    <Input addonAfter='град.ХКШ'/>
                 </Form.Item>
                 <Form.Item 
                     name="chlorine" 
@@ -86,7 +86,7 @@ function ACFormSecRis({handleSend,name,reset,setReset}) {
                         { required: true,message: 'Пожалуйста, введите ост. Хлор'},
                         { pattern:/^-?\d+(\.\d+)?$/,message:"Введите корректное число" }
                     ]} >
-                    <Input />
+                    <Input addonAfter='мг/дм³'/>
                 </Form.Item>
                 <Form.Item 
                     name="aluminum" 
@@ -96,7 +96,7 @@ function ACFormSecRis({handleSend,name,reset,setReset}) {
                         { required: true,message: 'Пожалуйста, введите ост. Алюминий'},
                         { pattern:/^-?\d+(\.\d+)?$/,message:"Введите корректное число" }
                     ]} >
-                    <Input />
+                    <Input addonAfter='мг/дм³'/>
                 </Form.Item>
                 <Form.Item 
                     name="turbidity" 
@@ -106,7 +106,7 @@ function ACFormSecRis({handleSend,name,reset,setReset}) {
                         {required: true,message: 'Пожалуйста, введите Мутность'},
                         { pattern:/^-?\d+(\.\d+)?$/,message:"Введите корректное число" }
                     ]} >
-                    <Input />
+                    <Input addonAfter='мг/дм³'/>
                 </Form.Item>
                 <Form.Item 
                     name="chlorides" 

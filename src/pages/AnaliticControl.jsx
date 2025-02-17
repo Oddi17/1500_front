@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react';
+import React,{useState,useContext,useEffect} from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import ACFormWater from '../components/AnaliticContol/ACFormWater'
@@ -9,14 +9,24 @@ import '../css/AnaliticControl.css';
 
 
 function AnaliticControl(){
+    const [currentDate,setCurrentDate] = useState(new Date().toLocaleString())
     const [reset,setReset] = useState(false)
     const [isLoading,setIsLoading] = useState(false)
     const {setIsAuth} = useContext(AuthContext);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentDate(new Date().toLocaleString());
+        }, 1000);
+    
+        return () => clearInterval(interval);
+      }, []);
+
+
     const handleSend= (data,url) => {
         setIsLoading(true);
-        axios.post(`http://10.50.50.2/api/analitic/${url}`,data,{withCredentials: true})
+        axios.post(`http://10.50.50.2/api/analitic/${url}`,data,{withCredentials: true})      
         .then((response)=>{ 
             setReset(true)
             message.success("Данные успешно отправлены")
@@ -42,6 +52,9 @@ function AnaliticControl(){
         <>  
             <div className='title-page'>
                 Аналитический контроль
+            </div>
+            <div className='current-time'>
+                {`${currentDate.toLocaleString()}`}
             </div>
             {isLoading && 
                 <Spin tip="Отправляем...">

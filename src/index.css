@@ -6,7 +6,6 @@ body{
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: white;
-  /* position: relative; */
 }
 
 :root {
@@ -138,4 +137,8 @@ body{
 .ant-card .ant-card-body .ant-card-grid{
   border: 1px solid rgba(185, 197, 193, 0.5) !important;
   box-shadow: revert !important;
+}
+
+.ant-table-filter-dropdown-btns .ant-btn-variant-link{
+  color: white
 }

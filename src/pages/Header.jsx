@@ -11,7 +11,7 @@ function Header(){
     const navigate = useNavigate();
     const location = useLocation();
     const [open, setOpen] = useState(false);
-    const { isAuth, setIsAuth,role} = useContext(AuthContext);
+    const { isAuth, setIsAuth, role, name} = useContext(AuthContext);
     
 
     const showDrawer = () => {
@@ -77,7 +77,13 @@ function Header(){
                         block
                         className="drawer-button"
                         >
-                        {role}
+                        <div style={{
+                            display:'flex',
+                            flexDirection:'column',
+                        }}>
+                            <span style={{textAlign:'left'}}>Роль: {role}</span>
+                            <span style={{textAlign:'left'}}>Пользователь: {name}</span>
+                        </div>
                     </Button>
                     <Button
                         type="text"

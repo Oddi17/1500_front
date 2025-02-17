@@ -11,7 +11,7 @@ const { Text, Title} = Typography;
 export default function Login(){
     const [formlogin] = Form.useForm();
     const navigate = useNavigate();
-    const { isAuth, setIsAuth,setRole} = useContext(AuthContext);
+    const {isAuth, setIsAuth,setRole,setName} = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = () => {
@@ -25,6 +25,7 @@ export default function Login(){
                 message.success("Пользователь успешно зашел")
                 setIsAuth(true)
                 setRole(response.data.role)
+                setName(response.data.username)
                 navigate("/home");
             })
             .catch((error) => {

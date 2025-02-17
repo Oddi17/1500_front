@@ -8,7 +8,7 @@ function ProtectedRoute({redirectPath='/home',rolesArray=[],children}) {
   const {isAuth} = useContext(AuthContext);
   const {role} = useContext(AuthContext);
   if (!isAuth) {
-    if (location.pathname === "/home"){
+    if (location.pathname !== "/home"){
       message.error("Пожалуйста, войдите в систему")
     }
     return <Navigate to="/home" state={{from:location}} replace />

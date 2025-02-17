@@ -7,8 +7,9 @@ const columns = [
       dataIndex: 'recdt',
       key: 'recdt',
       width: '130px',
-      align: "center",  
-      render: (text) => new Date(text).toLocaleString()
+      align: "center",
+      sorter: (a,b) => (new Date(a.recdt).getTime()-new Date(b.recdt).getTime()),  
+      render: (text) => new Date(text).toLocaleString(),
     },
     {
       title: 'Локация',
@@ -16,7 +17,17 @@ const columns = [
       key: "location",
       width: '120px',
       align: "center",
-      
+      filters: [
+        {
+          text: 'Исходная вода',
+          value: 'Исходная вода',
+        },
+        {
+          text: 'Второй подъем',
+          value: 'Второй подъем',
+        },
+      ],
+      onFilter: (value, record) => record.location.indexOf(value) === 0,
     },
     {
       title: 'Температура',
@@ -68,6 +79,13 @@ const columns = [
       width: '110px',
       align: "center",
     },
+    {
+      title: 'Пользователь',
+      dataIndex: "username",
+      key: "username",
+      width: '160px',
+      align: "center",
+    }
 ]
 
 
