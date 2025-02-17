@@ -116,7 +116,7 @@ function AnaliticJournalTable({isLoading,data}){
       return change_data
     }
     const exportToExcel = (exportData) => {
-          if (!exportData  || !exportTotals) {
+          if (!exportData) {
               console.error("Ошибка: данные отсутствуют")
               return
           }
