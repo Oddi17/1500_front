@@ -17,8 +17,6 @@ export default function WaterBalance() {
         getData(start_time,end_time,sample)
     }
 
-
-    
     const getData = (start_time,end_time,sample) => {
         setIsLoading(true);
             const url = `http://10.50.50.2/api/report/waterbalance?start_time=${start_time}&end_time=${end_time}&sample=${sample}`

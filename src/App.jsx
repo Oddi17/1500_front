@@ -27,20 +27,20 @@ function App() {
           <Route path="/" element={<Navigate to="/home" replace/>} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route element={<ProtectedRoute rolesArray={['admin']} />} >
+          <Route element={<ProtectedRoute rolesArray={['admin','user']} />}>
             <Route path="/waterbalance" element={<WaterBalance />} />
             <Route path="/chemistry" element={<Chemistry />} />
             <Route path="/electricity" element={<Electricity />} />
             <Route path="/reliability" element={<Reliability />} />
           </Route>
           <Route path="/analitic-control" element={
-              <ProtectedRoute rolesArray={['admin','operator']}> 
+              <ProtectedRoute rolesArray={['admin','operator','user']}> 
                 <AnaliticControl />
               </ProtectedRoute> 
             }
           />
           <Route path="/analitic-journal" element={
-              <ProtectedRoute rolesArray={['admin','operator']}> 
+              <ProtectedRoute rolesArray={['admin','operator','user']}> 
                 <AnaliticJournal />
               </ProtectedRoute> 
             }
