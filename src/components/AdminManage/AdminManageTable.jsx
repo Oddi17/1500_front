@@ -97,7 +97,7 @@ function AdminManageTable({data}){
             title: 'Логин пользователя' ,
             dataIndex: "login",
             key: "login",
-            width: '130px',
+            width: '180px',
             align: "center",
         },
         // {
@@ -112,7 +112,7 @@ function AdminManageTable({data}){
             dataIndex : 'role',
             key: "role",
             align: "center",
-            width: '130px',
+            width: '150px',
             render: (_,device) => (
                 <Select
                     defaultValue= {device.role}
@@ -129,6 +129,7 @@ function AdminManageTable({data}){
             dataIndex : 'key',
             align: "center",
             key: 'action',
+            width: '150px',
             render: (_,device) => (
                 <>
                     <a onClick={()=>handleDelete(device.id)}>Удалить</a>

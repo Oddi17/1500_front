@@ -16,8 +16,27 @@ export default function AdminManage(){
     const [isOpenModal,setIsOpenModal] = useState(false)
     const [form] = Form.useForm();
 
-    const handleSend = () => {
-
+    const handleSend = (user) => {
+        axios.post(`http://10.50.50.2/api/auth/create/user`,user,{withCredentials:true})
+        .then((response)=>{
+            message.success("Пользователь успешно добавлен")
+            handleCancelModal()
+        })
+        .catch((error)=>{
+            if (error.status === 401){
+                message.error("Пользователь не авторизован")
+                setIsAuth(false)
+                navigate("/login");
+            }else if (error.status === 403){
+                message.error("Недостаточно прав")
+                setReset(true)
+            }else{
+                message.error(error.message)
+            }
+        })
+        .finally(() => {
+            //setIsLoading(false); 
+        });  
     }
     const handleOpenModal= () => {
         setIsOpenModal(true);
@@ -37,7 +56,7 @@ export default function AdminManage(){
             //     "key":index,
             // }))
             //setTableData(add_key_data)
-            setTableData(response.data.data_source)
+            setTableData(response.data)
         })
         .catch((error) => {
             if (error.status === 401){
