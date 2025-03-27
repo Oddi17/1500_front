@@ -3,8 +3,6 @@ import { Form,Space,Button,Input,Select,message } from 'antd';
 import {EditOutlined} from '@ant-design/icons';
 
 export default function AddUserForm({handleSend,addForm}) {
-
-    //const [role,setRole] = useState("operator")
     const handleSubmitAdd = () => {
         addForm.validateFields().then((objform)=>{
             handleSend(objform)
@@ -12,19 +10,16 @@ export default function AddUserForm({handleSend,addForm}) {
             message.error(error.message)
         })
     }
-    // const handleChange = (value) => {
-    //     setRole(value);
-    // }
     return (
         <>
             <Form 
                 form={addForm}
                 onFinish={handleSubmitAdd}
                 name="AddUser"
-                initialValues={{ user_role: "operator" }}
+                initialValues={{ role: "operator" }}
             >
                 <Form.Item 
-                    name="user_name" 
+                    name="first_name" 
                     label="Имя пользователя" 
                     normalize={(value) => value?.trim()}
                     rules={[
@@ -33,7 +28,7 @@ export default function AddUserForm({handleSend,addForm}) {
                     <Input />
                 </Form.Item>  
                 <Form.Item 
-                    name="user_login" 
+                    name="login" 
                     label="Логин пользователя" 
                     normalize={(value) => value?.trim()}
                     rules={[
@@ -42,7 +37,7 @@ export default function AddUserForm({handleSend,addForm}) {
                     <Input />
                 </Form.Item>  
                 <Form.Item 
-                    name="user_password" 
+                    name="password" 
                     label="Пароль пользователя" 
                     normalize={(value) => value?.trim()}
                     rules={[
@@ -51,7 +46,7 @@ export default function AddUserForm({handleSend,addForm}) {
                     <Input />
                 </Form.Item>
                 <Form.Item 
-                    name="user_role" 
+                    name="role" 
                     label="Роль пользователя"
                     >
                     <Select

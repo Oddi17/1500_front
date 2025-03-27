@@ -48,9 +48,9 @@ function App() {
             }
           />
           <Route path="/admin-manage" element={
-            <ProtectedRoute rolesArray={['admin']}> 
+            //<ProtectedRoute rolesArray={['admin']}> 
               <AdminManage />
-            </ProtectedRoute>
+            //</ProtectedRoute>
           }/>
           <Route path="*" element={<NotFound />} />
         </Routes>

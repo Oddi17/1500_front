@@ -51,11 +51,6 @@ export default function AdminManage(){
         setIsLoading(true);
             const url = `http://10.50.50.2/api/auth/show/user`
             axios.get(url,{withCredentials: true}).then((response)=>{
-            // const add_key_data = response.data.data_source.map((item,index)=>(my_index = index,{
-            //     ...item,
-            //     "key":index,
-            // }))
-            //setTableData(add_key_data)
             setTableData(response.data)
         })
         .catch((error) => {

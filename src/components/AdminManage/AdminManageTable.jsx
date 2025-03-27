@@ -1,14 +1,27 @@
 import React,{useState} from 'react';
-import {Table,Select,message,Modal} from 'antd';
+import {Table,Select,message,Modal,Form} from 'antd';
 import axios from 'axios';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-
+import ChangePassword from './ChangePassword';
 
 const { confirm } = Modal;
 
-//также стоит добавить поиск пользователей в таблице
 function AdminManageTable({data}){
     const [isLoading,setIsLoading] = useState(false)
+    const [isOpenModal,setIsOpenModal] = useState(false)
+    const [currentId, setCurrentId] = useState()
+    const [form] = Form.useForm();
+
+    const handleOpenModal= (id_user) => {
+        setIsOpenModal(true);
+        setCurrentId(id_user)
+    };
+  
+    const handleCancelModal = () => {
+        setIsOpenModal(false);
+        setCurrentId()
+        form.resetFields();
+    };
 
     const handleDelete = (id_user) => {
         confirm({
@@ -20,7 +33,7 @@ function AdminManageTable({data}){
             okType: "danger",
             onOk() {
                 setIsLoading(true)
-                axios.delete(`http://10.50.50.2/api/auth/delete/user/?id=${id_user}`,{withCredentials: true})
+                axios.delete(`http://10.50.50.2/api/auth/delete/user/${id_user}`,{withCredentials: true})
                 .then((response)=>{ 
                     message.success("Пользователь успешно удален")
                 })
@@ -46,8 +59,33 @@ function AdminManageTable({data}){
         })
          
     }
+    const handleChangePassword = (user_password,user_id)=>{
+        axios.put(`http://10.50.50.2/api/auth/change/user/password`,{
+            "id":user_id,
+            "password":user_password
+        },{withCredentials: true})
+        .then((response)=>{ 
+            message.success("Пароль пользователя успешно изменен")
+        })
+        .catch((error)=>{
+            if (error.status === 401){
+                message.error("Пользователь не авторизован")
+                setIsAuth(false)
+                navigate("/login");
+            }else if (error.status === 403){
+                message.error("Недостаточно прав")
+                setReset(true)
+            }else{
+                message.error(error.message)
+            }
+        })
+        .finally(() => {
+            setIsLoading(false); 
+        });
+    }
 
-    const handleChange = (value,id) => {
+
+    const handleChange = (user_role,user_id) => {
         confirm({
             icon: <ExclamationCircleOutlined />,
             title: "Вы уверены, что хотите сменить роль пользователя?",
@@ -57,8 +95,8 @@ function AdminManageTable({data}){
             onOk() {
                 setIsLoading(true)
                 axios.put(`http://10.50.50.2/api/auth/change/user/role`,{
-                    id:id,
-                    role:value
+                    "id":user_id,
+                    "role":user_role
                 },{withCredentials: true})
                 .then((response)=>{ 
                     message.success("Роль пользователя успешно изменена")
@@ -100,13 +138,6 @@ function AdminManageTable({data}){
             width: '180px',
             align: "center",
         },
-        // {
-        //     title: 'Роль пользователя' ,
-        //     dataIndex: "role",
-        //     key: "role",
-        //     width: '130px',
-        //     align: "center",
-        // },
         {
             title: 'Роль пользователя',
             dataIndex : 'role',
@@ -125,6 +156,18 @@ function AdminManageTable({data}){
             )
         },
         {
+            title: 'Пароль',
+            dataIndex : 'key',
+            align: "center",
+            key: 'action',
+            width: '150px',
+            render: (_,device) => (
+                <>
+                    <a onClick={()=>handleOpenModal(device.id)}>Сменить пароль</a>
+                </>
+            )
+        },
+        {
             title: 'Действия',
             dataIndex : 'key',
             align: "center",
@@ -140,15 +183,30 @@ function AdminManageTable({data}){
 
     const defaultTitle = () => 'Управление пользователями';
     return (
-        <Table
-            bordered
-            loading = {isLoading}
-            columns={columns} 
-            dataSource={data}
-            title={defaultTitle}
-            pagination={false}
-            scroll={{ y: 500 }} 
-        />
+        <>
+            <Table
+                bordered
+                loading = {isLoading}
+                columns={columns} 
+                dataSource={data}
+                title={defaultTitle}
+                pagination={false}
+                scroll={{ y: 500 }} 
+            />
+            <Modal
+                title="Изменить пароль пользователя" 
+                open={isOpenModal} 
+                onCancel={handleCancelModal} 
+                footer={null} >
+                    <ChangePassword
+                        id_user={currentId}
+                        handleChange={handleChangePassword}
+                        changeForm={form} 
+                    />
+            </Modal>    
+        </>
+       
+        
     )
 }
 export default AdminManageTable
