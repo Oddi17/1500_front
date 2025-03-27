@@ -7,8 +7,8 @@ import {EditOutlined} from '@ant-design/icons';
 export default function ChangePassword({handleChange,changeForm,id_user}) {
     const handleSubmitAdd = () => {
         changeForm.validateFields().then((objform)=>{
-            objform["id"] = id_user
-            handleChange(objform)
+            //objform["id"] = id_user
+            handleChange(objform.password,id_user)
         }).catch((error)=>{
             message.error(error.message)
         })

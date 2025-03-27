@@ -66,6 +66,7 @@ function AdminManageTable({data}){
         },{withCredentials: true})
         .then((response)=>{ 
             message.success("Пароль пользователя успешно изменен")
+            handleCancelModal()
         })
         .catch((error)=>{
             if (error.status === 401){
@@ -145,6 +146,7 @@ function AdminManageTable({data}){
             align: "center",
             width: '150px',
             render: (_,device) => (
+                device.role === 'admin' ? "админ" : (
                 <Select
                     defaultValue= {device.role}
                     style={{ width: 120 }}
@@ -154,6 +156,7 @@ function AdminManageTable({data}){
                         { value: 'user', label: 'инженер' },
                     ]}/>
             )
+        )
         },
         {
             title: 'Пароль',
